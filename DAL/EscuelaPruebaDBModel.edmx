@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EscuelaPruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="30" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+          <Property Name="CarreraId" Type="int" />
+        </EntityType>
+        <EntityType Name="Alumno_Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlumnoId" Type="int" />
+          <Property Name="MateriaId" Type="int" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Alumno__CarreraI__60A75C0F">
+          <End Role="Carrera" Type="Self.Carrera" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="CarreraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alumno_Ma__Alumn__02FC7413">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="AlumnoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alumno_Ma__Mater__03F0984C">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="0..1" />
+          <End Role="Alumno_Materia" Type="Self.Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="MateriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EscuelaPruebaModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alumno_Materia" EntityType="Self.Alumno_Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carrera" EntityType="Self.Carrera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Alumno__CarreraI__60A75C0F" Association="Self.FK__Alumno__CarreraI__60A75C0F">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alumno_Ma__Alumn__02FC7413" Association="Self.FK__Alumno_Ma__Alumn__02FC7413">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alumno_Ma__Mater__03F0984C" Association="Self.FK__Alumno_Ma__Mater__03F0984C">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EscuelaPruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CarreraId" Type="Int32" />
+          <NavigationProperty Name="Carrera" Relationship="EscuelaPruebaModel.FK__Alumno__CarreraI__60A75C0F" FromRole="Alumno" ToRole="Carrera" />
+          <NavigationProperty Name="Alumno_Materia" Relationship="EscuelaPruebaModel.FK__Alumno_Ma__Alumn__02FC7413" FromRole="Alumno" ToRole="Alumno_Materia" />
+        </EntityType>
+        <EntityContainer Name="EscuelaPruebaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+          <EntitySet Name="Alumno_Materia" EntityType="EscuelaPruebaModel.Alumno_Materia" />
+          <EntitySet Name="Carrera" EntityType="EscuelaPruebaModel.Carrera" />
+          <EntitySet Name="Materia" EntityType="EscuelaPruebaModel.Materia" />
+          <AssociationSet Name="FK__Alumno__CarreraI__60A75C0F" Association="EscuelaPruebaModel.FK__Alumno__CarreraI__60A75C0F">
+            <End Role="Carrera" EntitySet="Carrera" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alumno_Ma__Alumn__02FC7413" Association="EscuelaPruebaModel.FK__Alumno_Ma__Alumn__02FC7413">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Alumno_Ma__Mater__03F0984C" Association="EscuelaPruebaModel.FK__Alumno_Ma__Mater__03F0984C">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="Alumno_Materia" EntitySet="Alumno_Materia" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Alumno_Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlumnoId" Type="Int32" />
+          <Property Name="MateriaId" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="EscuelaPruebaModel.FK__Alumno_Ma__Alumn__02FC7413" FromRole="Alumno_Materia" ToRole="Alumno" />
+          <NavigationProperty Name="Materia" Relationship="EscuelaPruebaModel.FK__Alumno_Ma__Mater__03F0984C" FromRole="Alumno_Materia" ToRole="Materia" />
+        </EntityType>
+        <EntityType Name="Carrera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumno" Relationship="EscuelaPruebaModel.FK__Alumno__CarreraI__60A75C0F" FromRole="Carrera" ToRole="Alumno" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumno_Materia" Relationship="EscuelaPruebaModel.FK__Alumno_Ma__Mater__03F0984C" FromRole="Materia" ToRole="Alumno_Materia" />
+        </EntityType>
+        <Association Name="FK__Alumno__CarreraI__60A75C0F">
+          <End Type="EscuelaPruebaModel.Carrera" Role="Carrera" Multiplicity="0..1" />
+          <End Type="EscuelaPruebaModel.Alumno" Role="Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="CarreraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alumno_Ma__Alumn__02FC7413">
+          <End Type="EscuelaPruebaModel.Alumno" Role="Alumno" Multiplicity="0..1" />
+          <End Type="EscuelaPruebaModel.Alumno_Materia" Role="Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="AlumnoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Alumno_Ma__Mater__03F0984C">
+          <End Type="EscuelaPruebaModel.Materia" Role="Materia" Multiplicity="0..1" />
+          <End Type="EscuelaPruebaModel.Alumno_Materia" Role="Alumno_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alumno_Materia">
+              <PropertyRef Name="MateriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EscuelaPruebaModelStoreContainer" CdmEntityContainer="EscuelaPruebaEntities">
+          <EntitySetMapping Name="Alumno">
+            <EntityTypeMapping TypeName="EscuelaPruebaModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CarreraId" ColumnName="CarreraId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alumno_Materia">
+            <EntityTypeMapping TypeName="EscuelaPruebaModel.Alumno_Materia">
+              <MappingFragment StoreEntitySet="Alumno_Materia">
+                <ScalarProperty Name="MateriaId" ColumnName="MateriaId" />
+                <ScalarProperty Name="AlumnoId" ColumnName="AlumnoId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carrera">
+            <EntityTypeMapping TypeName="EscuelaPruebaModel.Carrera">
+              <MappingFragment StoreEntitySet="Carrera">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia">
+            <EntityTypeMapping TypeName="EscuelaPruebaModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
